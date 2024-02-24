@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Saas Company (ShopAnythingLagos)
+  description: APIs for merchants to manage their product listings themselves
+  version: 1.0.0
+  host: localhost:3002
+
+paths:
+  /product/{merchantId}:
+    post:
+      summary: Merchant creates a new product
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          description: ID of the merchant creating the product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: {}
+      responses:
+        '200':
+          description: Product Created successfully
+        '404':
+          description: productId already exists
+        '500':
+          description: Internal Server Error
+
+    get:
+      summary: Retrieve all the products listed by the Merchant including the date the product was added to the system from the data file
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          description: ID of the merchant
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Merchant not found
+        '500':
+          description: Internal Server Error
+
+  /product/{merchantId}/{productId}:
+    get:
+      summary: Get a product listed by a merchant by productId
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          description: ID of the merchant
+        - in: path
+          name: productId
+          required: true
+          description: ID of the product
+      responses:
+        '200':
+          description: Successful
+        '404':
+          description: Merchant or Product not found
+          content:
+            application/json:
+
+    put:
+      summary: Update a product listed by a merchant by its productId
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          description: ID of the merchant
+        - in: path
+          name: productId
+          required: true
+          description: ID of the product
+      responses:
+        '200':
+          description: Product updated successfully
+        '404':
+          description: Merchant or Product not found
+          content:
+            application/json:
+
+    delete:
+      summary: Delete a product listed by a merchant by its productId
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          description: ID of the merchant
+        - in: path
+          name: productId
+          required: true
+          description: ID of the product
+      responses:
+        '200':
+          description: Product deleted successfully
+        '404':
+          description: Merchant or Product not found
+          content:
+            application/json:
