@@ -63,21 +63,24 @@ exports.getProduct = (req, res) => {
 
   const merchant = merchants.find((m) => m.id === merchantId);
 
+
   if (!merchant) {
     return res.status(404).json({ error: "Merchant not found" });
   }
 
-  const product = merchant.products.find((m) => m.productId === productId);
+  const product = merchant.products.find((p) => p.productId === productId);
 
   if (!product) {
     return res.status(404).json({ error: "Product not found" });
-  } else {
-    res.status(200).json({
-      status: "Success",
-      product
-    });
-  };
   }
+
+  res.status(200).json({
+    status: "Success",
+    product
+  });
+};
+
+
 
 
 exports.updateProduct = (req, res) => {
